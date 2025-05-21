@@ -20,6 +20,10 @@ const CandidateSearch = () => {
 
   useEffect(() => {
     const loadCandidateDetails = async () => {
+      if (index >= candidates.length) {
+        setCurrentCandidate(null);
+        return;
+      }
       if (candidates[index]) {
         const data = await searchGithubUser(candidates[index]);
         setCurrentCandidate(data);
@@ -43,7 +47,7 @@ const CandidateSearch = () => {
   };
 
   if (!currentCandidate) {
-    return <p>Loading candidate...</p>;
+    return <p>No more candidates to review.</p>;
   }
   
   return (
